@@ -1,0 +1,581 @@
+นี่คือไฟล์ HTML สำหรับอินโฟกราฟิกแบบโต้ตอบที่แสดงสมรรถนะทางการเงิน “สมดุลการใช้จ่ายและการออม” สำหรับผู้เรียนวัยทำงาน พร้อมส่วนแสดง KSA และสมรรถนะย่อยแบบขยายได้
+```html
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Fin Comp. | สมดุลการใช้จ่ายและการออม - วัยทำงาน</title>
+    <!-- Google Fonts: Sarabun -->
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #e9f3eb 0%, #f0f8f2 100%);
+            font-family: 'Sarabun', sans-serif;
+            padding: 2rem 1.5rem;
+            color: #1a2e2c;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(0px);
+            border-radius: 2rem;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0,0,0,0.02);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        /* inner padding */
+        .content-pad {
+            padding: 2rem 2rem 2rem 2rem;
+        }
+
+        /* HEADER */
+        .hero {
+            background: linear-gradient(115deg, #0b3b2f 0%, #1f6e43 100%);
+            color: white;
+            padding: 2rem 2rem 1.8rem 2rem;
+            border-radius: 0 0 2rem 2rem;
+            margin-bottom: 0;
+        }
+
+        .header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .title-section h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.2px;
+            line-height: 1.3;
+        }
+
+        .title-section h1 small {
+            font-size: 1rem;
+            font-weight: 500;
+            display: block;
+            color: #e0f2e9;
+            margin-top: 0.25rem;
+        }
+
+        .badge-age {
+            background: rgba(255, 215, 120, 0.2);
+            backdrop-filter: blur(4px);
+            padding: 0.6rem 1.2rem;
+            border-radius: 60px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 1.1rem;
+            border: 1px solid rgba(255,215,140,0.5);
+        }
+
+        /* Financial Characteristics */
+        .highlight-card {
+            background: #fefce6;
+            border-left: 8px solid #e9b35f;
+            border-radius: 1.5rem;
+            padding: 1.4rem 2rem;
+            margin: 1.6rem 0 2rem 0;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease;
+        }
+        .highlight-card:hover {
+            transform: translateY(-3px);
+        }
+        .highlight-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #b45f1b;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 0.75rem;
+        }
+        .highlight-card p {
+            font-size: 1.05rem;
+            line-height: 1.5;
+            font-weight: 500;
+            color: #2a4b41;
+        }
+
+        /* KSA TABS */
+        .ksa-section {
+            margin: 2rem 0 2rem 0;
+        }
+        .tab-buttons {
+            display: flex;
+            gap: 0.8rem;
+            border-bottom: 2px solid #d4e0da;
+            padding-bottom: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 0.6rem 1.6rem;
+            font-family: 'Sarabun', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: 0.2s;
+            color: #2f6b56;
+            background: #eef3f0;
+        }
+        .tab-btn.active {
+            background: #2f6b56;
+            color: white;
+            box-shadow: 0 4px 10px rgba(31,110,67,0.3);
+        }
+        .tab-btn:hover:not(.active) {
+            background: #d9e6e0;
+        }
+        .tab-content {
+            background: #ffffffdd;
+            margin-top: 1.5rem;
+            padding: 1.6rem 1.8rem;
+            border-radius: 1.5rem;
+            background: white;
+            border: 1px solid #e2efea;
+            transition: all 0.2s ease;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.02);
+        }
+        .tab-pane {
+            display: none;
+            animation: fadeIn 0.25s ease;
+        }
+        .tab-pane.active-pane {
+            display: block;
+        }
+        .ksa-list {
+            list-style: none;
+        }
+        .ksa-list li {
+            margin-bottom: 1rem;
+            padding-left: 1.8rem;
+            position: relative;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        .ksa-list li::before {
+            content: "🌿";
+            position: absolute;
+            left: -0.2rem;
+            top: 0;
+            color: #2f6b56;
+        }
+        .ksa-title {
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: #1a5a48;
+            margin-bottom: 1rem;
+            border-left: 4px solid #e9b35f;
+            padding-left: 1rem;
+        }
+
+        /* Sub-competency cards (expand) */
+        .subcomp-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 2rem 0 2rem 0;
+        }
+        .sub-card {
+            background: white;
+            border-radius: 1.2rem;
+            border: 1px solid #cde0d9;
+            overflow: hidden;
+            transition: all 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+        .sub-card-header {
+            background: #fafef7;
+            padding: 1.1rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #1c4e3f;
+            transition: background 0.2s;
+        }
+        .sub-card-header:hover {
+            background: #f1f9f3;
+        }
+        .sub-card-header span:first-child {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .expand-icon {
+            font-size: 1.5rem;
+            font-weight: 500;
+            transition: transform 0.2s;
+        }
+        .sub-card-body {
+            max-height: 0;
+            padding: 0 1.5rem;
+            overflow: hidden;
+            transition: max-height 0.35s ease-out, padding 0.2s;
+            background: #ffffff;
+            border-top: 0px solid #e9dbbd;
+        }
+        .sub-card-body.show {
+            max-height: 380px;
+            padding: 0.8rem 1.5rem 1.3rem 1.5rem;
+            border-top: 1px solid #ecf3ef;
+        }
+        .sub-detail-text {
+            color: #2c5548;
+            line-height: 1.55;
+            font-size: 0.98rem;
+        }
+
+        /* Activity Ideas */
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.4rem;
+            margin: 1.2rem 0 1rem;
+        }
+        .activity-item {
+            background: #fefaf1;
+            border-radius: 1.2rem;
+            padding: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.2s;
+            border: 1px solid #f7e9cf;
+        }
+        .activity-item:hover {
+            transform: translateY(-5px);
+            background: #fff7e8;
+            box-shadow: 0 12px 18px -12px rgba(0,0,0,0.1);
+        }
+        .activity-icon {
+            font-size: 2.2rem;
+        }
+        .activity-text {
+            font-weight: 600;
+            font-size: 0.96rem;
+            line-height: 1.4;
+            color: #2b5a4a;
+        }
+
+        /* Key Message Banner */
+        .key-banner {
+            margin-top: 2.2rem;
+            background: linear-gradient(95deg, #0a2f28 0%, #195e44 100%);
+            border-radius: 2rem;
+            padding: 1.4rem 2rem;
+            text-align: center;
+            color: #fff3cf;
+            font-weight: 600;
+            font-size: 1.2rem;
+            letter-spacing: 0.3px;
+            box-shadow: 0 8px 14px rgba(0, 0, 0, 0.1);
+        }
+        .key-banner p {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+        .key-banner strong {
+            font-weight: 800;
+            color: #ffdf9c;
+        }
+
+        /* footer */
+        .footer-note {
+            font-size: 0.75rem;
+            text-align: center;
+            padding: 1rem 0 1.2rem;
+            color: #61877a;
+            border-top: 1px solid #e0ede7;
+            margin-top: 1.8rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px);}
+            to { opacity: 1; transform: translateY(0px);}
+        }
+
+        @media (max-width: 680px) {
+            body {
+                padding: 1rem;
+            }
+            .content-pad {
+                padding: 1.3rem;
+            }
+            .hero {
+                padding: 1.5rem;
+            }
+            .title-section h1 {
+                font-size: 1.4rem;
+            }
+            .tab-btn {
+                padding: 0.4rem 1rem;
+                font-size: 0.9rem;
+            }
+            .highlight-card p {
+                font-size: 0.95rem;
+            }
+            .key-banner {
+                font-size: 1rem;
+            }
+        }
+
+        hr {
+            margin: 12px 0;
+            border: 0;
+            height: 1px;
+            background: linear-gradient(90deg, #cbdcd5, transparent);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hero">
+        <div class="header-flex">
+            <div class="title-section">
+                <h1>สมดุลการใช้จ่ายและการออม <br><small>Spending & Saving Balance</small></h1>
+                <div style="margin-top: 0.5rem; font-weight: 500;">สมรรถนะทางการเงิน ตามกรอบ ธปท.</div>
+            </div>
+            <div class="badge-age">
+                <span>🧑‍💼👩‍💼</span> วัยทำงาน • ผู้มีรายได้ (Earner)
+            </div>
+        </div>
+        <div style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.85;">การบริหารจัดการเงินเพื่อสุขภาวะทางการเงินที่ยั่งยืน · อิสรภาพทางการเงิน</div>
+    </div>
+
+    <div class="content-pad">
+        <!-- Financial Characteristics Card -->
+        <div class="highlight-card">
+            <h3>
+                <span>📊</span> คุณลักษณะผู้เรียนวัยทำงาน
+            </h3>
+            <p>✅ มีรายได้ประจำหรือรายได้สม่ำเสมอ เริ่มมีความรับผิดชอบทางการเงินที่ซับซ้อนขึ้น เช่น หนี้บัตรเครดิต สินเชื่อส่วนบุคคล หรือการวางแผนการเงินระยะยาว<br>
+            ✅ ต้องเผชิญภาวะ “เงินไม่พอ” บางช่วง จำเป็นต้องจัดลำดับหนี้และรายจ่าย พร้อมสร้างสมดุลระหว่างการใช้จ่ายเพื่อคุณภาพชีวิตปัจจุบัน และการออมเพื่ออนาคต (เกษียณ/ความมั่นคง)<br>
+            ✅ มีโอกาสเข้าถึงผลิตภัณฑ์ทางการเงินที่หลากหลาย จำเป็นต้องมีวินัยและความรู้ในการใช้เครดิตอย่างชาญฉลาด</p>
+        </div>
+
+        <!-- K-S-A Interactive Tabs -->
+        <div class="ksa-section">
+            <div class="tab-buttons">
+                <button class="tab-btn active" data-tab="tab-knowledge">📘 ความรู้ (Knowledge)</button>
+                <button class="tab-btn" data-tab="tab-skills">⚙️ ทักษะ (Skills)</button>
+                <button class="tab-btn" data-tab="tab-attitudes">🧠 เจตคติ (Attitudes)</button>
+            </div>
+            <div class="tab-content">
+                <div id="tab-knowledge" class="tab-pane active-pane">
+                    <div class="ksa-title">📖 องค์ความรู้ที่จำเป็น</div>
+                    <ul class="ksa-list">
+                        <li>เข้าใจหลักการจัดสรรเงินระหว่าง “ปัจจุบันและอนาคต” และประโยชน์ของการออมเพื่อเกษียณอย่างต่อเนื่อง</li>
+                        <li>รู้จักระบบการตัดยอดบัตรเครดิต ดอกเบี้ย และความเสี่ยงของการชำระขั้นต่ำ</li>
+                        <li>เข้าใจแนวคิดหนี้ดี-หนี้เสีย และกลยุทธ์การปรับโครงสร้างหนี้เมื่อจำเป็น</li>
+                        <li>ตระหนักถึงผลกระทบของเงินเฟ้อและอัตราดอกเบี้ยที่มีต่อการออมระยะยาว</li>
+                    </ul>
+                </div>
+                <div id="tab-skills" class="tab-pane">
+                    <div class="ksa-title">🛠️ ทักษะเชิงปฏิบัติ</div>
+                    <ul class="ksa-list">
+                        <li>สามารถจัดทำแผนการใช้จ่ายรายเดือนที่สอดคล้องกับเป้าหมายการออม (เช่น 50-30-20 หรืออื่น ๆ)</li>
+                        <li>ทักษะการจัดลำดับหนี้: จ่ายหนี้ดอกเบี้ยสูงก่อน และสามารถเจรจาต่อรองกับเจ้าหนี้</li>
+                        <li>สามารถใช้เครื่องมือทางการเงิน เช่น การโอนอัตโนมัติเพื่อการออม หรือแอปพลิเคชันช่วยติดตามรายจ่าย</li>
+                        <li>วิเคราะห์ข้อเสนอผ่อนชำระ 0% เปรียบเทียบต้นทุนที่แท้จริง ก่อนตัดสินใจ</li>
+                    </ul>
+                </div>
+                <div id="tab-attitudes" class="tab-pane">
+                    <div class="ksa-title">💎 เจตคติที่ส่งเสริมสมดุล</div>
+                    <ul class="ksa-list">
+                        <li>มีวินัยในการ “จ่ายตัวเองก่อน” (Pay yourself first) และไม่ถอนเงินออมระยะยาวก่อนวัยอันควร</li>
+                        <li>เห็นคุณค่าของความพอเพียงและการสร้างอิสรภาพทางการเงิน มากกว่าการบริโภคเพื่อภาพลักษณ์</li>
+                        <li>รับผิดชอบต่อหนี้สินของตนเอง กล้าเผชิญและแก้ไขปัญหา มากกว่าหนีปัญหา</li>
+                        <li>มองว่าการวางแผนการเงินเป็นกระบวนการเชิงรุกและสร้างความมั่นคงในชีวิต</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sub-competency Section (Expandable Cards) -->
+        <h3 style="margin: 0.8rem 0 0.2rem 0; font-size: 1.4rem; font-weight: 700; color: #1e5a48;">📌 สมรรถนะย่อย & กลยุทธ์เชิงลึก</h3>
+        <p style="margin-bottom: 1rem; color: #4a6b61;">คลิกที่แต่ละหัวข้อเพื่อดูรายละเอียดเพิ่มเติมเกี่ยวกับการสร้างสมดุล</p>
+        <div class="subcomp-grid">
+            <!-- Card 1 -->
+            <div class="sub-card">
+                <div class="sub-card-header">
+                    <span>💰 1. การจัดสรรเงินเพื่อปัจจุบัน & อนาคต</span>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="sub-card-body">
+                    <div class="sub-detail-text">
+                        <strong>เป้าหมายปัจจุบัน:</strong> บริหารรายจ่ายให้สอดคล้องกับรายได้ หลีกเลี่ยงหนี้เกินตัว<br>
+                        <strong>เป้าหมายอนาคต:</strong> วางแผนออมเพื่อเกษียณอย่างเป็นระบบ ด้วยวินัยไม่ถอนก่อนกำหนด <br>
+                        สร้างสมดุลโดยใช้เทคนิคแบ่งสัดส่วนเงินเดือน เช่น 50% ค่าใช้จ่ายจำเป็น, 30% เพื่อความสุข, 20% ออม/ลงทุน
+                    </div>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="sub-card">
+                <div class="sub-card-header">
+                    <span>💳 2. การบริหารจัดการหนี้เพื่อรักษาความมั่งคั่ง</span>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="sub-card-body">
+                    <div class="sub-detail-text">
+                        • เข้าใจระบบตัดยอดบัตรเครดิต : ยอดในใบแจ้งหนี้อาจไม่ใช่ยอดใช้จ่ายจริง หากมีการผ่อนหรือดอกรอบตัด <br>
+                        • จัดลำดับการชำระหนี้หลายก้อน: ก้อนที่มีดอกเบี้ยแพงที่สุดก่อน (บัตรเครดิต สินเชื่อส่วนบุคคล) <br>
+                        • เจรจากับเจ้าหนี้เพื่อปรับโครงสร้างหนี้เมื่อเกิดวิกฤตทางการเงิน ลดภาระและรักษาเครดิต
+                    </div>
+                </div>
+            </div>
+            <!-- Card 3: การบูรณาการ KSA -->
+            <div class="sub-card">
+                <div class="sub-card-header">
+                    <span>🧩 3. การบูรณาการผ่าน K-S-A</span>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="sub-card-body">
+                    <div class="sub-detail-text">
+                        <strong>ความรู้ + ทักษะ + เจตคติ</strong> ทำงานร่วมกัน: รู้หลักการ (K) มีความสามารถจัดสรรเงิน (S) และมีวินัย/จิตสำนึก (A) 
+                        การสร้างสมดุลที่ยั่งยืนต้องอาศัยความตระหนักและการลงมือทำอย่างสม่ำเสมอ 
+                    </div>
+                </div>
+            </div>
+            <!-- Card 4: การเรียนรู้ผ่านบริบทจริง -->
+            <div class="sub-card">
+                <div class="sub-card-header">
+                    <span>🎯 4. การเรียนรู้ผ่านบริบทจริงและสังคม (Applied Learning)</span>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="sub-card-body">
+                    <div class="sub-detail-text">
+                        • <strong>การเรียนรู้จากประสบการณ์ (Experiential):</strong> จำลองสถานการณ์วางแผนรายจ่ายรายเดือนที่มีทั้งหนี้และค่าใช้จ่ายครอบครัว <br>
+                        • <strong>การแลกเปลี่ยนเรียนรู้เพื่อน (Peer Learning):</strong> ถกประเด็น “ผ่อนชำระ: ทางเลือกหรือกับดัก” และ “การใช้เงินเพื่อภาพลักษณ์ vs พอเพียง” สร้างเจตคติที่รับผิดชอบต่ออนาคต
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Activity Ideas Section -->
+        <h3 style="margin: 2rem 0 0.5rem 0; font-size: 1.4rem;">🧪 กิจกรรมที่เหมาะกับวัยทำงาน</h3>
+        <div class="activities-grid">
+            <div class="activity-item">
+                <div class="activity-icon">📆</div>
+                <div class="activity-text">“30 วัน ท้าทายรายจ่าย” บันทึกการใช้จ่ายและจัดสรรเงินออมเพื่อเป้าหมายระยะสั้น</div>
+            </div>
+            <div class="activity-item">
+                <div class="activity-icon">🃏</div>
+                <div class="activity-text">จำลองสถานการณ์ “ชำระหนี้ 3 ก้อน” ด้วยงบจำกัด พร้อมเผชิญเหตุฉุกเฉิน</div>
+            </div>
+            <div class="activity-item">
+                <div class="activity-icon">🗣️</div>
+                <div class="activity-text">กลุ่มพูดคุย “ผ่อน 0% ดีจริงหรือ?” แลกเปลี่ยนมุมมองทางการเงินในที่ทำงาน</div>
+            </div>
+            <div class="activity-item">
+                <div class="activity-icon">📊</div>
+                <div class="activity-text">คำนวณเงินออมเพื่อเกษียณและตั้งเป้าหมายรายเดือน พร้อมแผนลดหนี้</div>
+            </div>
+        </div>
+
+        <!-- Key Message Banner -->
+        <div class="key-banner">
+            <p>
+                🌟 <strong>“สมดุลใช้จ่ายและออมของวัยทำงานคือ กระบวนการตัดสินใจเชิงยุทธศาสตร์”</strong> 🌟
+                <br>บริหารรายได้จำกัดให้ตอบโจทย์ชีวิตวันนี้ พร้อมประกันความมั่นคงถึงวันสุดท้ายของชีวิต
+            </p>
+        </div>
+        <div class="footer-note">
+            อ้างอิงข้อมูลสมรรถนะทางการเงินสำหรับวัยทำงาน (Earner) ตามกรอบธนาคารแห่งประเทศไทย<br>
+            สร้างสรรค์เพื่อการเรียนรู้ : สร้างสมดุลเพื่อสุขภาวะทางการเงินที่ยั่งยืน
+        </div>
+    </div>
+</div>
+
+<script>
+    // Interactive KSA Tabs
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const panes = document.querySelectorAll('.tab-pane');
+
+    function activateTab(tabId) {
+        panes.forEach(pane => {
+            pane.classList.remove('active-pane');
+        });
+        const activePane = document.getElementById(tabId);
+        if(activePane) activePane.classList.add('active-pane');
+        
+        tabBtns.forEach(btn => {
+            btn.classList.remove('active');
+            if(btn.getAttribute('data-tab') === tabId) {
+                btn.classList.add('active');
+            }
+        });
+    }
+
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const tabTarget = btn.getAttribute('data-tab');
+            if(tabTarget) activateTab(tabTarget);
+        });
+    });
+
+    // Expand/collapse for sub-competency cards with smooth max-height
+    const subCards = document.querySelectorAll('.sub-card');
+    subCards.forEach(card => {
+        const header = card.querySelector('.sub-card-header');
+        const body = card.querySelector('.sub-card-body');
+        const iconSpan = header.querySelector('.expand-icon');
+        // Initially collapsed (max-height 0)
+        body.classList.remove('show');
+        iconSpan.innerHTML = '▼';
+        
+        header.addEventListener('click', () => {
+            const isExpanded = body.classList.contains('show');
+            if (isExpanded) {
+                body.classList.remove('show');
+                iconSpan.innerHTML = '▼';
+            } else {
+                // collapse others (optional but better UX)
+                subCards.forEach(otherCard => {
+                    const otherBody = otherCard.querySelector('.sub-card-body');
+                    const otherIcon = otherCard.querySelector('.expand-icon');
+                    if (otherBody && otherBody !== body && otherBody.classList.contains('show')) {
+                        otherBody.classList.remove('show');
+                        if(otherIcon) otherIcon.innerHTML = '▼';
+                    }
+                });
+                body.classList.add('show');
+                iconSpan.innerHTML = '▲';
+            }
+        });
+    });
+
+    // ensure on load all subbodies are collapsed (extra safety)
+    document.querySelectorAll('.sub-card-body').forEach(body => {
+        body.classList.remove('show');
+    });
+    document.querySelectorAll('.expand-icon').forEach(icon => {
+        icon.innerHTML = '▼';
+    });
+</script>
+</body>
+</html>
+```
